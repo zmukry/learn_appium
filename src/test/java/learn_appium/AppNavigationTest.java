@@ -1,8 +1,9 @@
 package learn_appium;
 
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import learn_appium.page_objects.BottomMenuLinks;
+import learn_appium.page_objects.WebviewPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import java.net.URI;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class FirstAppiumTest {
+public class AppNavigationTest {
 
     private AndroidDriver driver;
 
@@ -39,30 +40,28 @@ public class FirstAppiumTest {
     }
 
     @Test
-    public void firstAppiumTest() {
-        System.out.println("Verifying App Home Page");
-        var homeIcon = driver.findElement(AppiumBy.accessibilityId("Home"));
-        assertTrue(Boolean.parseBoolean(homeIcon.getAttribute("selected")));
+    public void appNavigationTest() throws InterruptedException {
+        var bottomMenuLinks = new BottomMenuLinks(driver);
+        Boolean isHomeSelected = bottomMenuLinks.isBottomIconSelected("Home");
+        assertTrue(isHomeSelected);
 
-        var webviewIcon = driver.findElement(AppiumBy.accessibilityId("Webview"));
-        webviewIcon.click();
-        System.out.println("Verifying App Webview Page");
+        bottomMenuLinks.clickBottomIcon("Webview");
+        isHomeSelected = bottomMenuLinks.isBottomIconSelected("Webview");
 
-        var loginIcon = driver.findElement(AppiumBy.accessibilityId("Login"));
-        loginIcon.click();
-        System.out.println("Verifying App Login Page");
+        var webviewPage = new WebviewPage(driver);
+        webviewPage.verifyWebviewPage();
 
-        var formsIcon = driver.findElement(AppiumBy.accessibilityId("Forms"));
-        formsIcon.click();
-        System.out.println("Verifying App Forms Page");
+        bottomMenuLinks.clickBottomIcon("Login");
+        isHomeSelected = bottomMenuLinks.isBottomIconSelected("Login");
 
-        var swipeIcon = driver.findElement(AppiumBy.accessibilityId("Swipe"));
-        swipeIcon.click();
-        System.out.println("Verifying App Swipe Page");
+        bottomMenuLinks.clickBottomIcon("Login");
+        isHomeSelected = bottomMenuLinks.isBottomIconSelected("Forms");
 
-        var dragIcon = driver.findElement(AppiumBy.accessibilityId("Drag"));
-        dragIcon.click();
-        System.out.println("Verifying App Drag and Drop Page");
+        bottomMenuLinks.clickBottomIcon("Login");
+        isHomeSelected = bottomMenuLinks.isBottomIconSelected("Swipe");
+
+        bottomMenuLinks.clickBottomIcon("Login");
+        isHomeSelected = bottomMenuLinks.isBottomIconSelected("Drag");
     }
 
     @AfterEach
@@ -70,5 +69,4 @@ public class FirstAppiumTest {
         driver.quit();
         System.out.println("Quit Android Driver...");
     }
-
 }

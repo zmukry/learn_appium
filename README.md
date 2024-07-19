@@ -22,8 +22,8 @@ Hybrid Mobile Applications that have a native wrapper around the web view
 9. Install Appium Server and Appium Inspector
 
 ### Appium Inspector
-Appium Inspector is a GUI assistant tool for Appium, providing visual inspection of the application under test. It can show the application page screenshot along with its page source, and includes various features for interacting with the app.
+Appium Inspector is a GUI assistant tool for Appium https://github.com/appium/appium-inspector, providing visual inspection of the application under test. It can show the application page screenshot along with its page source, and includes various features for interacting with the app.
 
 ### Test Framework
-This basic Mobile Test Automation project is a Maven Java project, and contains only Appium Java-Client and JUnit5 dependencies.  
+This basic Mobile Test Automation project is a Maven Java project, and contains only Appium Java-Client and JUnit5 dependencies. Testing App used in this Project can be downloaded from https://github.com/webdriverio/native-demo-app/releases.
 
