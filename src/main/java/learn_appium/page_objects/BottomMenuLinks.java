@@ -1,16 +1,16 @@
 package learn_appium.page_objects;
 
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.android.AndroidDriver;
+import learn_appium.drivers.AndroidDriverManager;
 
-public class BottomMenuLinks extends BasePage{
+public class BottomMenuLinks extends BasePage {
 
-    public BottomMenuLinks(AndroidDriver driver) {
-        super(driver);
+    public BottomMenuLinks() {
+        super(AndroidDriverManager.getDriver());
     }
 
     public void clickBottomIcon(String iconName) {
-        this.clickElement((AppiumBy) AppiumBy.accessibilityId(iconName));
+        this.clickUiElement((AppiumBy) AppiumBy.accessibilityId(iconName));
     }
 
     public Boolean isBottomIconSelected(String iconName) {

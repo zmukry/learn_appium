@@ -1,6 +1,5 @@
 package learn_appium;
 
-import learn_appium.drivers.AndroidDriverManager;
 import learn_appium.page_objects.BottomMenuLinks;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ public class AppNavigationTest extends JUnit5Hooks {
 
     @Test
     public void appNavigationTest() {
-        var bottomMenuLinks = new BottomMenuLinks(AndroidDriverManager.getDriver());
+        var bottomMenuLinks = new BottomMenuLinks();
         assertTrue(bottomMenuLinks.isBottomIconSelected("Home"));
 
         bottomMenuLinks.clickBottomIcon("Webview");
