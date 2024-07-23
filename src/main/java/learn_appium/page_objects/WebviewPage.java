@@ -1,6 +1,5 @@
 package learn_appium.page_objects;
 
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +14,7 @@ public class WebviewPage extends BasePage{
         this.webDriver = driver;
     }
 
-    public void verifyWebviewPage() throws InterruptedException {
+    public void verifyWebviewPage() {
         System.out.println("Verifying Webview Page");
 
         // Switch to 'Webview' Context
@@ -24,7 +23,11 @@ public class WebviewPage extends BasePage{
         WebElement menuButton = webDriver.findElement(By.xpath("//button[@class='navbar__toggle clean-btn']"));
         menuButton.click();
 
-        Thread.sleep(3000);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         this.changeDriverContext("NATIVE_APP");
     }
 }

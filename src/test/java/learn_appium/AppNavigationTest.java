@@ -1,72 +1,31 @@
 package learn_appium;
 
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
+import learn_appium.drivers.AndroidDriverManager;
 import learn_appium.page_objects.BottomMenuLinks;
-import learn_appium.page_objects.WebviewPage;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.net.MalformedURLException;
-import java.net.URI;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AppNavigationTest {
-
-    private AndroidDriver driver;
-
-    @BeforeEach
-    public void setUp() {
-        System.out.println("Initializing Android Driver...");
-
-        UiAutomator2Options options = new UiAutomator2Options()
-                .amend("platformName", "Android")
-                .amend("appium:deviceName", "Pixel 8")
-                .amend("appium:app", "C:\\zuhair\\AppiumPlayground\\android.wdio.native.app.v1.0.8.apk")
-                .amend("appium:automationName", "UiAutomator2")
-                .amend("appium:ensureWebviewsHavePages", true)
-                .amend("appium:nativeWebScreenshot", true)
-                .amend("appium:newCommandTimeout", 3600)
-                .amend("appium:connectHardwareKeyboard", true);
-
-        try {
-            driver = new AndroidDriver(URI.create("http://127.0.0.1:4723").toURL(), options);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
+public class AppNavigationTest extends JUnit5Hooks {
 
     @Test
-    public void appNavigationTest() throws InterruptedException {
-        var bottomMenuLinks = new BottomMenuLinks(driver);
-        Boolean isHomeSelected = bottomMenuLinks.isBottomIconSelected("Home");
-        assertTrue(isHomeSelected);
+    public void appNavigationTest() {
+        var bottomMenuLinks = new BottomMenuLinks(AndroidDriverManager.getDriver());
+        assertTrue(bottomMenuLinks.isBottomIconSelected("Home"));
 
         bottomMenuLinks.clickBottomIcon("Webview");
-        isHomeSelected = bottomMenuLinks.isBottomIconSelected("Webview");
-
-        var webviewPage = new WebviewPage(driver);
-        webviewPage.verifyWebviewPage();
+        assertTrue(bottomMenuLinks.isBottomIconSelected("Webview"));
 
         bottomMenuLinks.clickBottomIcon("Login");
-        isHomeSelected = bottomMenuLinks.isBottomIconSelected("Login");
+        assertTrue(bottomMenuLinks.isBottomIconSelected("Login"));
 
-        bottomMenuLinks.clickBottomIcon("Login");
-        isHomeSelected = bottomMenuLinks.isBottomIconSelected("Forms");
+        bottomMenuLinks.clickBottomIcon("Forms");
+        assertTrue(bottomMenuLinks.isBottomIconSelected("Forms"));
 
-        bottomMenuLinks.clickBottomIcon("Login");
-        isHomeSelected = bottomMenuLinks.isBottomIconSelected("Swipe");
+        bottomMenuLinks.clickBottomIcon("Swipe");
+        assertTrue(bottomMenuLinks.isBottomIconSelected("Swipe"));
 
-        bottomMenuLinks.clickBottomIcon("Login");
-        isHomeSelected = bottomMenuLinks.isBottomIconSelected("Drag");
-    }
-
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-        System.out.println("Quit Android Driver...");
+        bottomMenuLinks.clickBottomIcon("Drag");
+        assertTrue(bottomMenuLinks.isBottomIconSelected("Drag"));
     }
 }
