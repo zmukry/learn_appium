@@ -14,14 +14,14 @@ public class BasePage {
     public void clickUiElement(AppiumBy locator) {
         var uiElementToBeClicked = driver.findElement(locator);
         uiElementToBeClicked.click();
-        System.out.println("Clicked UI Element: " + uiElementToBeClicked);
+        System.out.println("Clicked UI Element: \"" + uiElementToBeClicked + "\"");
     }
 
     public void enterText(AppiumBy locator, String inputText) {
         var uiTextField = driver.findElement(locator);
         uiTextField.clear();
         uiTextField.sendKeys(inputText);
-        System.out.println("Entered Text: \"" + inputText + "\" in UI TextField: " + uiTextField);
+        System.out.println("Entered Text: \"" + inputText + "\" in UI TextField: \"" + uiTextField + "\"");
     }
 
     public String getElementAttribute(AppiumBy locator, String attributeName) {

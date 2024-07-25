@@ -20,6 +20,7 @@ public class AndroidDriverManager {
     public static void createAndroidDriver () {
         final UiAutomator2Options uiAutomator2Options;
         uiAutomator2Options = new UiAutomator2Options ()
+                // 'Avd' related commands are for optional
                 .setAvd ("Pixel_8_API_34")
                 .setAvdLaunchTimeout (Duration.ofSeconds (300))
                 .setAvdReadyTimeout (Duration.ofSeconds (100))

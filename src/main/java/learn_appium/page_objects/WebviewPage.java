@@ -14,8 +14,8 @@ public class WebviewPage extends BasePage{
     AndroidDriver driver;
     WebDriverWait wait;
 
-    private final String menuButtonXPath = "//button[@class='navbar__toggle clean-btn']";
-    private final String menuNavbarXPath = "//div[@class='navbar-sidebar']";
+    By menuButtonLocator = By.xpath("//button[@class='navbar__toggle clean-btn']");
+    By menuNavbarLocator = By.xpath("//div[@class='navbar-sidebar']");
 
     public WebviewPage() {
         super(AndroidDriverManager.getDriver());
@@ -29,11 +29,11 @@ public class WebviewPage extends BasePage{
         // Switch to 'Webview' Context
         this.changeDriverContext("WEBVIEW_com.wdiodemoapp");
 
-        WebElement menuButton = driver.findElement(By.xpath(menuButtonXPath));
+        WebElement menuButton = driver.findElement(menuButtonLocator);
         wait.until(ExpectedConditions.visibilityOf(menuButton));
         menuButton.click();
 
-        WebElement menuNavbar = driver.findElement(By.xpath(menuNavbarXPath));
+        WebElement menuNavbar = driver.findElement(menuNavbarLocator);
         wait.until(ExpectedConditions.visibilityOf(menuNavbar));
 
         // Switch back to Default 'NATIVE_APP' Context
